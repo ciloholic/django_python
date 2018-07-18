@@ -4,8 +4,4 @@ from django.http import HttpResponse
 
 @login_required
 def index(request):
-    if request.user.is_superuser:
-        return HttpResponse('admin')
-    else:
-        return HttpResponse('guest')
-    # return render(request, 'admin/base_site.html')
+    return render(request, 'app/home.html')

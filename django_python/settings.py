@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app.middleware.AdminMiddleware',
 ]
 
 ROOT_URLCONF = 'django_python.urls'
@@ -123,6 +125,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-LOGIN_URL='/login'
-LOGIN_REDIRECT_URL='/'
-LOGOUT_REDIRECT_URL='/login'
+LOGIN_URL='admin:login'
+LOGIN_REDIRECT_URL='home'
+LOGOUT_REDIRECT_URL='admin:login'
