@@ -10,20 +10,18 @@
 
 {% block bodyclass %}{{ block.super }}dashboard{% endblock %}
 
-{% block userlinks %}
-    {% if user.is_active and user.is_superuser %}
-        {% if site_url %}
-            <a href="{% url 'app:index' %}">{% trans 'View site' %}</a> /
-        {% endif %}
-        {% url 'django-admindocs-docroot' as docsroot %}
-        {% if docsroot %}
-            <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
-        {% endif %}
-        {% if user.has_usable_password %}
-            <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
-        {% endif %}
+{% block usertools %}
+<div id="user-tools">
+    {% trans 'Welcome,' %}
+    <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+    {% if site_url %}
+        <a href="{% url 'app:index' %}">サイトを表示</a> /
     {% endif %}
-    <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
+    {% if user.has_usable_password %}
+        <a href="{% url 'admin:password_change' %}">パスワードの変更</a> /
+    {% endif %}
+    <a href="{% url 'admin:logout' %}">ログアウト</a>
+</div>
 {% endblock %}
 
 {% block breadcrumbs %}{% endblock %}

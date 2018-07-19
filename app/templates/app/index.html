@@ -10,20 +10,19 @@
 
 {% block bodyclass %}{{ block.super }}dashboard{% endblock %}
 
-{% block userlinks %}
-    {% if user.is_active and user.is_superuser %}
-        {% if site_url %}
-            <a href="{% url 'app:index' %}">{% trans 'View site' %}</a> /
-        {% endif %}
-        {% url 'django-admindocs-docroot' as docsroot %}
-        {% if docsroot %}
-            <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
-        {% endif %}
-        {% if user.has_usable_password %}
-            <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
-        {% endif %}
+{% block usertools %}
+<div id="user-tools">
+    {% trans 'Welcome,' %}
+    <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+    {% if user.is_superuser %}
+        <a href="{% url 'admin:index' %}">管理サイトを表示</a> /
     {% endif %}
-    <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
+    <a href="{% url 'admin:logout' %}">ログアウト</a>
+</div>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'app:index' %}">SHIサイト</a></h1>
 {% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
@@ -32,76 +31,9 @@
 
 {% block content %}
 <div id="content-main">
-
-{% if user.is_active and user.is_superuser and app_list %}
-    <!-- admin view -->
-    {% for app in app_list %}
-        <div class="app-{{ app.app_label }} module">
-        <table>
-        <caption>
-            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
-        </caption>
-        {% for model in app.models %}
-            <tr class="model-{{ model.object_name|lower }}">
-            {% if model.admin_url %}
-                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
-            {% else %}
-                <th scope="row">{{ model.name }}</th>
-            {% endif %}
-
-            {% if model.add_url %}
-                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
-            {% else %}
-                <td>&nbsp;</td>
-            {% endif %}
-
-            {% if model.admin_url %}
-                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
-            {% else %}
-                <td>&nbsp;</td>
-            {% endif %}
-            </tr>
-        {% endfor %}
-        </table>
-        </div>
-    {% endfor %}
-{% else %}
-    <!-- guest view -->
-{% endif %}
+    <p>download</p>
+    <p>upload</p>
 </div>
 {% endblock %}
 
-{% block sidebar %}
-{% if user.is_active and user.is_superuser %}
-    <!-- admin view -->
-    <div id="content-related">
-        <div class="module" id="recent-actions-module">
-            <h2>{% trans 'Recent actions' %}</h2>
-            <h3>{% trans 'My actions' %}</h3>
-                {% load log %}
-                {% get_admin_log 10 as admin_log for_user user %}
-                {% if not admin_log %}
-                <p>{% trans 'None available' %}</p>
-                {% else %}
-                <ul class="actionlist">
-                {% for entry in admin_log %}
-                <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
-                    {% if entry.is_deletion or not entry.get_admin_url %}
-                        {{ entry.object_repr }}
-                    {% else %}
-                        <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
-                    {% endif %}
-                    <br/>
-                    {% if entry.content_type %}
-                        <span class="mini quiet">{% filter capfirst %}{{ entry.content_type }}{% endfilter %}</span>
-                    {% else %}
-                        <span class="mini quiet">{% trans 'Unknown content' %}</span>
-                    {% endif %}
-                </li>
-                {% endfor %}
-                </ul>
-                {% endif %}
-        </div>
-    </div>
-{% endif %}
-{% endblock %}
+{% block sidebar %}{% endblock %}
