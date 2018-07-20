@@ -1,0 +1,61 @@
+html,
+body,
+#container {
+    height: 100%;
+}
+#content.content {
+    display: -ms-grid;
+    display: grid;
+    grid-template-rows: 50px 1fr 3fr 50px;
+    -ms-grid-rows: 50px 1fr 3fr 50px;
+    grid-template-columns: 300px 1fr 1fr 300px;
+    -ms-grid-columns: 300px 1fr 1fr 300px;
+    grid-template-areas:
+        '. ...... ...... .'
+        '. area-a area-b .'
+        '. area-c area-c .'
+        '. ...... ...... .';
+    padding: 0;
+    height: calc(100% - 60px);
+}
+
+.common-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.common-block.download {
+    grid-area: area-a;
+}
+.common-block.upload {
+    grid-area: area-b;
+}
+.history-block {
+    grid-area: area-c;
+}
+
+.common-button {
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 48px;
+    border-radius: 3px;
+    transition: .3s;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .12), 0 2px 2px 0 rgba(0, 0, 0, .24);
+}
+.common-button.download {
+    background: #2196f3;
+}
+.common-button.upload {
+    background: #ff5252;
+}
+.common-button:hover {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
+}
+.common-button:active {
+    transform: translate3d(0, 3px, 0);
+    -webkit-transform: translate3d(0, 3px, 0);
+}

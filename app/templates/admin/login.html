@@ -1,7 +1,9 @@
 {% extends "admin/base_site.html" %}
 {% load i18n static %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />
 {{ form.media }}
 {% endblock %}
 
@@ -10,7 +12,7 @@
 {% block usertools %}{% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}">SHIサイト</a></h1>
+<h1 id="site-name"><a href="{% url 'admin:index' %}">ユーザサイト</a></h1>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

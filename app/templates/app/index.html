@@ -4,11 +4,12 @@
 {% block extrastyle %}
 {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
 {% endblock %}
 
-{% block coltype %}colMS{% endblock %}
+{% block coltype %}content{% endblock %}
 
-{% block bodyclass %}{{ block.super }}dashboard{% endblock %}
+{% block bodyclass %}{% endblock %}
 
 {% block usertools %}
 <div id="user-tools">
@@ -22,7 +23,7 @@
 {% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'app:index' %}">SHIサイト</a></h1>
+<h1 id="site-name"><a href="{% url 'app:index' %}">ユーザサイト</a></h1>
 {% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
@@ -30,9 +31,14 @@
 {% block content_title %}{% endblock %}
 
 {% block content %}
-<div id="content-main">
-    <p>download</p>
-    <p>upload</p>
+<div class="common-block download">
+    <div class="common-button download">ダウンロード</div>
+</div>
+<div class="common-block upload">
+    <div class="common-button upload">アップロード</div>
+</div>
+<div class="history-block">
+    <div>履歴</div>
 </div>
 {% endblock %}
 
