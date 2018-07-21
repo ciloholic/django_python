@@ -38,7 +38,12 @@
     <div class="common-button upload">アップロード</div>
 </div>
 <div class="history-block">
-    <div>履歴</div>
+    <ul class="history-list">
+        <li>履歴</li>
+        {% for history in histories %}
+            <li>{{ history }}</li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}
 

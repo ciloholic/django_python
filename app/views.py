@@ -4,5 +4,6 @@ from django.http import HttpResponse
 
 @login_required
 def index(request):
-    context = {'title': 'トップ', 'site_title': 'ユーザサイト'}
+    histories = ['update_file', 'update_file', 'download_file']
+    context = {'title': 'トップ', 'site_title': 'ユーザサイト', 'histories': histories}
     return render(request, 'app/index.html', context)
