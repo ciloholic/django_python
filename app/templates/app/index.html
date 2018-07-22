@@ -7,6 +7,14 @@
 <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
 {% endblock %}
 
+{% block extrahead %}
+{{ block.super }}
+<script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+<script src="{% static "js/main.js" %}"></script>
+{{ block.super }}
+
+{% endblock %}
+
 {% block coltype %}content{% endblock %}
 
 {% block bodyclass %}{% endblock %}
@@ -32,19 +40,21 @@
 
 {% block content %}
 <div class="common-block download">
-    <div class="common-button download">ダウンロード</div>
+    <div id="download-button" class="common-button download">ダウンロード</div>
 </div>
 <div class="common-block upload">
-    <div class="common-button upload">アップロード</div>
+    <div id="upload-button" class="common-button upload">アップロード</div>
 </div>
 <div class="history-block">
     <ul class="history-list">
         <li>履歴</li>
         {% for history in histories %}
-            <li>{{ history }}</li>
+            <li>{{ history.timestamp }} {{ history.name }}</li>
         {% endfor %}
     </ul>
 </div>
 {% endblock %}
 
 {% block sidebar %}{% endblock %}
+
+{% block footer %}<div id="loading" class="loading"></div>{% endblock %}
